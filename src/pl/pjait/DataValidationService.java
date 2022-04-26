@@ -17,11 +17,21 @@ public class DataValidationService {
     public static boolean bankAccountNumberValidation(String bankAccountNumber) {
         return bankAccountNumber.matches("^\\d{26}$");
     }
-    /*
-    public static boolean dateOfBirthValidation() {
+
+    public static boolean dateOfBirthValidation(String dateOfBirth, String pesel) {
+        String yearFromDate = dateOfBirth.substring(2, 4);
+        String monthFromDate = dateOfBirth.substring(5, 7);
+        String dayFromDate = dateOfBirth.substring(8, 10);
+        String yearFromPesel = pesel.substring(0, 2);
+        String monthFromPesel = pesel.substring(2, 4);
+        String dayFromPesel = pesel.substring(4, 6);
+
+        return Integer.parseInt(yearFromDate) == Integer.parseInt(yearFromPesel) &&
+                Integer.parseInt(monthFromDate) == Integer.parseInt(monthFromPesel)
+                && Integer.parseInt(dayFromDate) == Integer.parseInt(dayFromPesel);
 
     }
-    */
+
 
     public static boolean genderValidation(String gender, String pesel) {
         return pesel.substring(pesel.length() - 2).matches("[02468]")

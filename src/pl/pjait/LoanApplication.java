@@ -1,16 +1,70 @@
 package pl.pjait;
 
-import java.util.Date;
-
 public class LoanApplication {
 
     private String firstName;
-    private String surname;
+    private String surName;
     private String pesel;
     private String nip;
     private String bankAccountNumber;
-    private Date dateOfBirth;
+    private String dateOfBirth;
     private String gender;
+
+
+    public LoanApplication (String firstName, String surName, String pesel,
+                            String dateOfBirth, String nip, String bankAccountNumber,
+                            String gender) {
+        DataValidationService dataValidationService = new DataValidationService();
+
+
+        if(dataValidationService.partOfNameValidation(firstName)){
+            this.firstName = firstName;
+            System.out.println("Name successfully saved...");
+        } else {
+            System.out.println("Wrong first name format");
+        }
+
+
+        if(dataValidationService.partOfNameValidation(surName)){
+            this.surName = surName;
+            System.out.println("Second name successfully saved...");
+        } else {
+            System.out.println("Wrong surname format");
+        }
+
+
+        if(dataValidationService.peselValidation(pesel)){
+            this.pesel = pesel;
+            System.out.println("Pesel successfully saved...");
+        } else {
+            System.out.println("Wrong pesel format");
+        }
+
+
+        if(dataValidationService.dateOfBirthValidation(dateOfBirth, pesel)){
+            this.dateOfBirth = dateOfBirth;
+            this.pesel = pesel;
+            System.out.println("Date of birth successfully saved...");
+        } else {
+            System.out.println("Date of birth doesn't match pesel, try again");
+        }
+
+
+        if(dataValidationService.nipValidation(nip)){
+            this.nip = nip;
+            System.out.println("Nip successfully saved...");
+        } else {
+            System.out.println("Wrong nip format");
+        }
+
+
+        if(dataValidationService.partOfNameValidation(firstName)){
+            this.gender = gender;
+            System.out.println("Gender successfully saved...");
+        } else {
+            System.out.println("Gender does not match");
+        }
+    }
 
     public String getGender() { return gender; }
 
@@ -24,12 +78,12 @@ public class LoanApplication {
         this.firstName = firstName;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getSurName() {
+        return surName;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setSurName(String surName) {
+        this.surName = surName;
     }
 
     public String getPesel() {
@@ -56,11 +110,11 @@ public class LoanApplication {
         this.bankAccountNumber = bankAccountNumber;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
